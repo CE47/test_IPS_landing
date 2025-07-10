@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Institute of Professional Studies – Career-Aligned Diplomas in Cybersecurity & AI</title>
+  <meta name="description" content="Get hands-on skills in cybersecurity or AI and prepare for CompTIA and other certification exams. Flexible delivery for working professionals.">
+  
+  <!-- Font Awesome -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> -->
+  <link rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+      crossorigin="anonymous" 
+      referrerpolicy="no-referrer" />
+  
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <!-- GSAP for Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Styles -->
+  <style>
+    :root {
+      --maroon: #800000;
+      --light-maroon: #b20000;
+      --dark-maroon: #660000;
+      --gold: #FFD700;
+      --gradient-start: #800000;
+      --gradient-end: #b20000;
+    }
+
+    .border-maroon{
+        border-color: maroon;
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiA.woff2) format('woff2');
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      overflow-x: hidden;
+    }
+
+    .section-header::after {
+      content: '';
+      display: block;
+      margin: 0.5rem auto 0;
+      width: 4rem;
+      height: 4px;
+      background: linear-gradient(to right, var(--maroon), var(--gold));
+      border-radius: 3px;
+    }
+
+    .frosted {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(200, 200, 200, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .blob-1 {
+      top: -100px;
+      left: -100px;
+      width: 300px;
+      height: 300px;
+      background: var(--maroon);
+    }
+
+    .blob-2 {
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: var(--light-maroon);
+    }
+
+    .blob-3 {
+      top: 50%;
+      left: 20%;
+      width: 200px;
+      height: 200px;
+      background: var(--gold);
+    }
+
+    .animate-fade {
+      animation: fadeInUp 1.2s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .text-maroon {
+      color: var(--maroon);
+    }
+
+    .bg-maroon {
+      background-color: var(--maroon);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    }
+
+    .card-hover {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .stat-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .stat-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 25px 50px -12px rgba(128, 0, 0, 0.25);
+    }
+
+    .testimonial-card {
+      border-left: 4px solid var(--maroon);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.1), rgba(255, 215, 0, 0.1));
+      margin-bottom: 1.5rem;
+      color: var(--maroon);
+      font-size: 28px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--maroon);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background-color: white;
+      border: 4px solid var(--maroon);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+      left: 50%;
+    }
+
+    .right::after {
+      left: -10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-item::after {
+        left: 15px;
+      }
+
+      .right {
+        left: 0%;
+      }
+    }
+
+    /* ... (existing styles remain mostly the same) ... */
+
+    .program-card {
+      transition: all 0.3s ease;
+      border: 1px solid rgba(128, 0, 0, 0.1);
+    }
+
+    .program-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(128, 0, 0, 0.15);
+      border-color: var(--maroon);
+    }
+
+    .hybrid-badge {
+      background: linear-gradient(135deg, var(--maroon), var(--dark-maroon));
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .cta-button {
+      color: maroon;
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .cta-button.primary {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      border: none;
+    }
+
+    .cta-button.secondary {
+      background: transparent;
+      color: var(--maroon);
+      border: 2px solid var(--maroon);
+    }
+
+    .cta-button.secondary:hover {
+      background: var(--maroon);
+      color: white;
+    }
+    
+    .cert-badge {
+      height: 60px;
+      /* filter: grayscale(100%) brightness(0.5); */
+      transition: all 0.3s ease;
+    }
+    
+    .cert-badge:hover {
+      filter: none;
+      transform: scale(1.1);
+    }
+    
+    .lab-icon {
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.1), rgba(255, 215, 0, 0.1));
+      border-radius: 12px;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--maroon);
+      margin-bottom: 1rem;
+    }
+    
+    .role-badge {
+      background: rgba(128, 0, 0, 0.1);
+      color: var(--maroon);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-block;
+      margin: 2px;
+    }
+    
+    .program-tab {
+      padding: 1rem 2rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .program-tab.active {
+      border-bottom-color: var(--maroon);
+      color: var(--maroon);
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body class="text-gray-900 bg-gradient-to-br from-gray-50 to-gray-100">
+
+<!-- Navigation -->
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <img src="logo.webp" alt="AMA Logo" class="h-10">
+      <span class="text-xl font-bold text-maroon">AMA Institute of Professional Studies</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-8 font-medium">
+      <a href="#programs" class="nav-link">Programs</a>
+      <a href="#certifications" class="nav-link">Certifications</a>
+      <a href="#benefits" class="nav-link">Benefits</a>
+      <a href="#testimonials" class="nav-link">Testimonials</a>
+      <a href="#cta" class="cta-button primary">Enroll Now</a>
+    </nav>
+    <button id="mobile-menu" class="md:hidden text-gray-800">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-nav" class="hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 z-50">
+    <div class="flex flex-col items-center space-y-4">
+      <a href="#programs" class="mobile-nav-link">Programs</a>
+      <a href="#certifications" class="mobile-nav-link">Certifications</a>
+      <a href="#benefits" class="mobile-nav-link">Benefits</a>
+      <a href="#testimonials" class="mobile-nav-link">Testimonials</a>
+      <a href="#cta" class="cta-button primary">Enroll Now</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center px-6 py-16 overflow-hidden">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="container max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="z-10 animate-fade">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+        <span class="text-gray-800">Launch Your Tech Career with</span><br>
+        <span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(to right, #800000, #b20000);">Professional Diplomas</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl">
+        Hands-on Cybersecurity & AI programs designed for working professionals. Gain industry-recognized skills and prepare for certification exams through flexible learning.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#cta" style="
+          background: linear-gradient(135deg, #800000, #b20000);
+          color: white;
+          font-weight: bold;
+          padding: 1rem 2rem;
+          border-radius: 0.5rem;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          transform: scale(1);
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        " onmouseover="this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)'; this.style.transform='scale(1.03)'" 
+          onmouseout="this.style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)'; this.style.transform='scale(1)'">
+          <i class="fas fa-graduation-cap"></i> Enroll Now
+        </a>
+        <a href="#programs" style="
+          border: 2px solid var(--maroon);
+          color: var(--maroon);
+          font-weight: bold;
+          padding: 1rem 2rem;
+          border-radius: 0.5rem;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+          transition: all 0.3s ease;
+          transform: scale(1);
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        " onmouseover="this.style.backgroundColor='var(--maroon)'; this.style.color='white'; this.style.transform='scale(1.03)'" 
+          onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--maroon)'; this.style.transform='scale(1)'">
+          <i class="fas fa-book-open"></i> Explore Programs
+        </a>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <div style="display: flex; align-items: center; gap: 0.5rem; background-color: white; padding: 0.5rem 1rem; border-radius: 9999px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+          <i class="fas fa-certificate" style="color: var(--maroon);"></i>
+          <span>Certification-focused</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; background-color: white; padding: 0.5rem 1rem; border-radius: 9999px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+          <i class="fas fa-laptop" style="color: var(--maroon);"></i>
+          <span>Flexible delivery</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; background-color: white; padding: 0.5rem 1rem; border-radius: 9999px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+          <i style="color: var(--maroon);" class="fas fa-briefcase"></i>
+          <span>Career advancement</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Cybersecurity Card -->
+        <div class="relative" style="margin-bottom: 4rem;">
+          <div class="absolute -top-8 -right-8 w-full h-full rounded-2xl border-4 border-maroon"></div>
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-3">
+            <div class="bg-gradient-to-br from-gray-100 to-white w-full aspect-video flex items-center justify-center">
+              <div class="text-center p-8">
+                <div style="width: 4rem; height: 4rem; background-color: #800000; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto; margin-bottom: 1rem;">
+                  <i class="fas fa-shield-alt" style="font-size: 1.5rem; color: white;"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-maroon mb-2">Diploma in Cybersecurity</h3>
+                <p class="text-gray-700">Threat detection, incident response & network defense</p>
+                <div class="mt-4">
+                  <span class="role-badge">SOC Analyst</span>
+                  <span class="role-badge">Security Operations</span>
+                  <span class="role-badge">Infosec Specialist</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Card -->
+        <div class="relative" style="margin-bottom: 4rem;">
+          <div class="absolute -top-8 -right-8 w-full h-full rounded-2xl border-4 border-maroon"></div>
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-3">
+            <div class="bg-gradient-to-br from-gray-100 to-white w-full aspect-video flex items-center justify-center">
+              <div class="text-center p-8">
+                <div style="width: 4rem; height: 4rem; background-color: #800000; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto; margin-bottom: 1rem;">
+                  <i class="fas fa-robot" style="font-size: 1.5rem; color: white;"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-maroon mb-2">Diploma in Applied AI</h3>
+                <p class="text-gray-700">Machine learning, automation & AI implementation</p>
+                <div class="mt-4">
+                  <span class="role-badge">AI Analyst</span>
+                  <span class="role-badge">Automation Specialist</span>
+                  <span class="role-badge">Data Ops</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hands-on Learning Card -->
+        <div class="relative" style="margin-bottom: 4rem;">
+          <div class="absolute -top-8 -right-8 w-full h-full rounded-2xl border-4 border-maroon"></div>
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl transform -rotate-3">
+            <div class="bg-gradient-to-br from-gray-100 to-white w-full aspect-video flex items-center justify-center">
+              <div class="text-center p-8">
+                <div style="width: 4rem; height: 4rem; background-color: #800000; border-radius: 9999px; display: flex; align-items: center; justify-center: center; margin: 0 auto; margin-bottom: 1rem;">
+                  <i class="fas fa-laptop-code" style="font-size: 1.5rem; color: white;"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-maroon mb-2">Hands-on Labs</h3>
+                <p class="text-gray-700">Real-world simulations and practical exercises</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flexible Delivery Card -->
+        <div class="relative" style="margin-bottom: 4rem;">
+          <div class="absolute -top-8 -right-8 w-full h-full rounded-2xl border-4 border-maroon"></div>
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-2">
+            <div class="bg-gradient-to-br from-gray-100 to-white w-full aspect-video flex items-center justify-center">
+              <div class="text-center p-8">
+                <div style="width: 4rem; height: 4rem; background-color: #800000; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto; margin-bottom: 1rem;">
+                  <i class="fas fa-calendar-alt text-white text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-maroon mb-2">Flexible Schedule</h3>
+                <p class="text-gray-700">Evening & weekend sessions for working professionals</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- Programs Section -->
+<section id="programs" class="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-maroon mb-4">Professional Diploma Programs</h2>
+    <p class="text-lg text-center text-gray-700 max-w-3xl mx-auto mb-16">Hands-on, career-focused programs designed for working professionals</p>
+    
+    <div class="flex justify-center mb-12">
+      <div class="flex border-b border-gray-200">
+        <div class="program-tab active" data-tab="cybersecurity">Cybersecurity</div>
+        <div class="program-tab" data-tab="ai">Applied AI</div>
+      </div>
+    </div>
+    
+    <!-- Cybersecurity Program Details -->
+    <div id="cybersecurity" class="program-content">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold text-maroon mb-6">Diploma in Cybersecurity</h3>
+          <p class="text-gray-700 mb-6">This intensive program prepares you for cybersecurity roles through hands-on training in threat detection, incident response, and network defense. Gain practical skills aligned with industry certifications.</p>
+          
+          <div class="mb-8">
+            <h4 class="text-xl font-bold text-maroon mb-4">Key Focus Areas:</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Threat detection & vulnerability analysis</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Incident response & forensic investigation</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Network security architecture & defense</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Security policies & compliance frameworks</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Penetration testing & ethical hacking</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-xl font-bold text-maroon mb-4">Career Outcomes:</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="role-badge">Security Analyst</span>
+              <span class="role-badge">SOC Specialist</span>
+              <span class="role-badge">Network Defender</span>
+              <span class="role-badge">Incident Responder</span>
+              <span class="role-badge">Security Consultant</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold text-maroon mb-6">Program Structure</h4>
+          
+          <div class="mb-8">
+            <h5 class="font-bold text-gray-800 mb-3">Duration:</h5>
+            <p class="text-gray-700">4 months (96 hours of instruction)</p>
+          </div>
+          
+          <div class="mb-8">
+            <h5 class="font-bold text-gray-800 mb-3">Delivery Options:</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <i class="fas fa-building text-maroon text-xl mb-2"></i>
+                <h6 class="font-bold">Onsite</h6>
+                <p class="text-sm text-gray-700">Hands-on lab sessions at AMA campuses</p>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <i class="fas fa-laptop text-maroon text-xl mb-2"></i>
+                <h6 class="font-bold">Virtual</h6>
+                <p class="text-sm text-gray-700">Live sessions via Microsoft Teams</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-8">
+            <h5 class="font-bold text-gray-800 mb-3">Schedule:</h5>
+            <p class="text-gray-700">Weekends Saturday and Sunday (8am-5pm)</p>
+          </div>
+          
+          <a href="#cta" class="cta-button primary w-full text-center">
+            <i class="fas fa-download mr-2"></i> Download Course Outline
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Applied AI Program Details (Hidden by default) -->
+    <div id="ai" class="program-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold text-maroon mb-6">Diploma in Applied AI</h3>
+          <p class="text-gray-700 mb-6">Master practical AI implementation through hands-on projects. Learn to develop machine learning solutions, automate processes, and deploy AI applications in business contexts.</p>
+          
+          <div class="mb-8">
+            <h4 class="text-xl font-bold text-maroon mb-4">Key Focus Areas:</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>AI fundamentals & business use cases</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Machine learning workflows & model development</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Python programming for AI applications</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>Natural language processing & computer vision</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-maroon mt-1 mr-3"></i>
+                <span>AI deployment & MLOps fundamentals</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-xl font-bold text-maroon mb-4">Career Outcomes:</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="role-badge">AI Specialist</span>
+              <span class="role-badge">Automation Engineer</span>
+              <span class="role-badge">Data Analyst</span>
+              <span class="role-badge">ML Operations</span>
+              <span class="role-badge">Business Intelligence</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold text-maroon mb-6">Program Structure</h4>
+          
+          <div class="mb-8">
+            <h5 class="font-bold text-gray-800 mb-3">Duration:</h5>
+            <p class="text-gray-700">4 months (96 hours of instruction)</p>
+          </div>
+          
+          <div class="mb-8">
+            <h5 class="font-bold text-gray-800 mb-3">Delivery Options:</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <i class="fas fa-building text-maroon text-xl mb-2"></i>
+                <h6 class="font-bold">Onsite</h6>
+                <p class="text-sm text-gray-700">Hands-on lab sessions at AMA campuses</p>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <i class="fas fa-laptop text-maroon text-xl mb-2"></i>
+                <h6 class="font-bold">Virtual</h6>
+                <p class="text-sm text-gray-700">Live sessions via Microsoft Teams</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-8">
+            <h5 class="font-bold text-gray-800 mb-3">Schedule:</h5>
+            <p class="text-gray-700">Weekends Saturday and Sunday (8am-5pm)</p>
+          </div>
+          
+          <a href="#cta" class="cta-button primary w-full text-center">
+            <i class="fas fa-download mr-2"></i> Download Course Outline
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certification Section -->
+<section id="certifications" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-maroon mb-4">Certification Preparation</h2>
+    <p class="text-lg text-center text-gray-700 max-w-3xl mx-auto mb-16">Our programs prepare you for industry-recognized certifications</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Cybersecurity Certifications -->
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <div class="flex items-center mb-6">
+          <i class="fas fa-shield-alt text-3xl text-maroon mr-4"></i>
+          <h3 class="text-2xl font-bold text-maroon">Cybersecurity Certifications</h3>
+        </div>
+        
+        <div class="flex flex-col items-center justify-center mb-12">
+          <div class="flex justify-center items-center gap-8">
+            <img src="https://images.credly.com/images/dbb39f01-125f-45c1-885c-38ff832cc686/blob" 
+                 alt="CompTIA Security+ Certification Badge"
+                 class="cert-badge w-40 h-40 object-contain hover:scale-110 transition-transform">
+            <img src="https://images.credly.com/size/680x680/images/dcd99b5b-da24-40a6-9364-62126d590c37/blob" 
+                 alt="CompTIA CySA+ Certification Badge"
+                 class="cert-badge w-40 h-40 object-contain hover:scale-110 transition-transform">
+            <img src="https://images.credly.com/size/680x680/images/c7ac176b-15a3-4726-827a-e8cee8fe44dc/blob" 
+                 alt="CompTIA PenTEST+ Certification Badge"
+                 class="cert-badge w-40 h-40 object-contain hover:scale-110 transition-transform">
+          </div>
+        </div>
+        
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Curriculum aligned with CompTIA Security+ exam objectives</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Practice exams and test-taking strategies</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Hands-on labs mirroring certification scenarios</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Voucher discounts for certification exams</span>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- AI Certifications -->
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <div class="flex items-center mb-6">
+          <i class="fas fa-robot text-3xl text-maroon mr-4"></i>
+          <h3 class="text-2xl font-bold text-maroon">AI & ML Certifications</h3>
+        </div>
+        
+        <div class="flex flex-col items-center justify-center mb-12">
+          <div class="flex justify-center items-center gap-8">
+            <img src="https://developers.google.com/static/certification/directory/images/badges/tensorflow_developer.png" 
+                 alt="Google AI Certification"
+                 class="cert-badge w-40 h-40 object-contain hover:scale-110 transition-transform">
+            <img src="https://images.credly.com/size/680x680/images/778bde6c-ad1c-4312-ac33-2fa40d50a147/image.png" 
+                 alt="AWS Machine Learning"
+                 class="cert-badge w-40 h-40 object-contain hover:scale-110 transition-transform">
+            <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" 
+                 alt="Microsoft AI Engineer"
+                 class="cert-badge w-40 h-40 object-contain hover:scale-110 transition-transform">
+          </div>
+        </div>
+        
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Preparation for industry-recognized AI certifications</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Project-based learning for practical skills validation</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Portfolio development for career advancement</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check text-maroon mt-1 mr-3"></i>
+            <span>Industry partnerships for certification pathways</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hands-on Learning -->
+<section class="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-bold text-maroon mb-6">Hands-on, Practical Learning</h2>
+        <p class="text-lg text-gray-700 mb-8">Our programs emphasize practical skills through real-world scenarios and lab-based exercises.</p>
+        
+        <div class="space-y-8">
+          <div class="flex">
+            <div class="lab-icon">
+              <i class="fas fa-flask"></i>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-xl font-bold text-maroon mb-3">Simulated Environments</h3>
+              <p class="text-gray-700">Practice in safe, controlled environments that replicate real-world security threats and AI challenges.</p>
+            </div>
+          </div>
+          
+          <div class="flex">
+            <div class="lab-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-xl font-bold text-maroon mb-3">Project-Based Assessments</h3>
+              <p class="text-gray-700">Demonstrate your skills through practical projects rather than traditional exams.</p>
+            </div>
+          </div>
+          
+          <div class="flex">
+            <div class="lab-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-xl font-bold text-maroon mb-3">Industry Scenario Workshops</h3>
+              <p class="text-gray-700">Tackle challenges based on real industry cases and security incidents.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Program Schedule -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h4 class="text-xl font-bold text-maroon mb-4">Weekend Schedule</h4>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <i class="fas fa-clock text-maroon mr-3"></i>
+              <span>Saturday and/or Sunday Sessions</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-calendar-alt text-maroon mr-3"></i>
+              <span>4 Saturdays per module</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-users text-maroon mr-3"></i>
+              <span>Small class sizes (15-20 students)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Virtual Labs -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mt-12">
+          <h4 class="text-xl font-bold text-maroon mb-4">Hands-on Virtual Labs</h4>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <i class="fas fa-laptop-code text-maroon mr-3"></i>
+              <span>24/7 lab environment access</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-shield-alt text-maroon mr-3"></i>
+              <span>Real-world security scenarios</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-tools text-maroon mr-3"></i>
+              <span>Industry-standard tools</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certification Path -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h4 class="text-xl font-bold text-maroon mb-4">Certification Path</h4>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <i class="fas fa-certificate text-maroon mr-3"></i>
+              <span>CompTIA Security+</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-certificate text-maroon mr-3"></i>
+              <span>EC-Council CEH</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-certificate text-maroon mr-3"></i>
+              <span>(ISC)² SSCP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Career Support -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mt-12">
+          <h4 class="text-xl font-bold text-maroon mb-4">Career Support</h4>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <i class="fas fa-briefcase text-maroon mr-3"></i>
+              <span>Resume building workshops</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-comments text-maroon mr-3"></i>
+              <span>Interview preparation</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-handshake text-maroon mr-3"></i>
+              <span>Industry networking events</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section id="benefits" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-maroon mb-4">Benefits for Working Professionals</h2>
+    <p class="text-lg text-center text-gray-700 max-w-3xl mx-auto mb-16">Designed to fit your busy schedule and career goals</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-sync-alt text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Career Transition</h3>
+        <p class="text-gray-700">Move into high-demand tech roles in just 6 months.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-chart-line text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Upskilling</h3>
+        <p class="text-gray-700">Add cutting-edge skills to advance in your current role.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-calendar-alt text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Flexible Schedule</h3>
+        <p class="text-gray-700">Evening and weekend sessions that fit your work life.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-laptop-house text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Remote Option</h3>
+        <p class="text-gray-700">Learn from anywhere through virtual live sessions.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-certificate text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Certification Ready</h3>
+        <p class="text-gray-700">Graduate prepared for industry certification exams.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-briefcase text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Career Services</h3>
+        <p class="text-gray-700">Resume prep, interview coaching, and job placement support.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-network-wired text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Industry Connections</h3>
+        <p class="text-gray-700">Network with professionals and hiring managers.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <div class="w-12 h-12 rounded-lg bg-maroon/10 flex items-center justify-center mb-4">
+          <i class="fas fa-hands-helping text-maroon text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Mentorship</h3>
+        <p class="text-gray-700">Guidance from industry practitioners throughout the program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" class="py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-maroon mb-4">Learner Experiences</h2>
+    <p class="text-lg text-center text-gray-700 max-w-3xl mx-auto mb-16">Hear from professionals who transformed their careers</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card bg-white p-8 rounded-xl">
+        <div class="flex items-center mb-6">
+          <div class="w-12 h-12 rounded-full bg-maroon flex items-center justify-center text-white mr-4">
+            JP
+          </div>
+          <div>
+            <h4 class="font-bold text-lg">James Peterson</h4>
+            <p class="text-gray-600">Cybersecurity Graduate</p>
+            <div class="flex mt-1">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700 italic">"The hands-on labs prepared me for real security challenges. I passed Security+ just 2 weeks after completing the program and transitioned to a SOC role."</p>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card bg-white p-8 rounded-xl">
+        <div class="flex items-center mb-6">
+          <div class="w-12 h-12 rounded-full bg-maroon flex items-center justify-center text-white mr-4">
+            MS
+          </div>
+          <div>
+            <h4 class="font-bold text-lg">Maria Santos</h4>
+            <p class="text-gray-600">Applied AI Graduate</p>
+            <div class="flex mt-1">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700 italic">"As a marketing professional, this program gave me the AI skills to automate reports and analyze customer data. I've implemented 3 AI solutions in my company since graduation."</p>
+      </div>
+      
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card bg-white p-8 rounded-xl">
+        <div class="flex items-center mb-6">
+          <div class="w-12 h-12 rounded-full bg-maroon flex items-center justify-center text-white mr-4">
+            RT
+          </div>
+          <div>
+            <h4 class="font-bold text-lg">Robert Tan</h4>
+            <p class="text-gray-600">Cybersecurity Graduate</p>
+            <div class="flex mt-1">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700 italic">"The evening sessions allowed me to keep my full-time job while training. The virtual labs were just as effective as being onsite. Landed a security analyst role before graduation."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section id="cta" style="padding-top: 5rem; padding-bottom: 5rem; background-image: linear-gradient(to bottom right, #660000, #800000); text-align: center; position: relative; overflow: hidden;">
+  <div class="max-w-4xl mx-auto px-6 relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Start Your Professional Transformation</h2>
+    <p style="font-size: 1.25rem; max-width: 42rem; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem; color: rgba(255, 255, 255, 0.9);">Join our next cohort and gain in-demand skills for the future</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <a href="https://amaes.edu.ph" 
+         class="bg-white p-6 rounded-lg text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div class="w-16 h-16 rounded-full bg-maroon flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-file-alt text-white text-2xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Download Brochure</h3>
+        <p class="text-sm text-gray-600 mb-4">Detailed program information</p>
+      </a>
+      
+      <a href="https://inquire.amaes.edu.ph/inquiry-form/"
+         class="bg-maroon p-6 rounded-lg text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-user-graduate text-maroon text-2xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Enroll Now</h3>
+        <p class="text-sm text-gray-200 mb-4">Secure your spot</p>
+      </a>
+      
+      <a href="https://m.me/amaeducsystem"
+         class="bg-white p-6 rounded-lg text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div class="w-16 h-16 rounded-full bg-maroon flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-comments text-white text-2xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-maroon mb-2">Talk to Advisor</h3>
+        <p class="text-sm text-gray-600 mb-4">Program consultation</p>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-12">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <div class="flex items-center space-x-3 mb-4">
+          <img src="logo.webp" alt="AMA Logo" class="h-10">
+          <span class="text-lg font-bold text-white">Institute of Professional Studies</span>
+        </div>
+        <p class="text-sm mb-4">Career-focused diplomas for working professionals.</p>
+        <p class="text-sm">CHED Recognized • Industry-Aligned • Certification Ready</p>
+      </div>
+      
+      <div>
+        <h4 class="text-white font-bold mb-4">Programs</h4>
+        <ul class="space-y-2">
+          <li><a href="#programs" class="hover:text-white transition">Diploma in Cybersecurity</a></li>
+          <li><a href="#programs" class="hover:text-white transition">Diploma in Applied AI</a></li>
+          <li><a href="#certifications" class="hover:text-white transition">Certification Preparation</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white font-bold mb-4">Resources</h4>
+        <ul class="space-y-2">
+          <li><a href="#benefits" class="hover:text-white transition">Program Benefits</a></li>
+          <li><a href="#certifications" class="hover:text-white transition">Certification Paths</a></li>
+          <li><a href="https://amaes.edu.ph" class="hover:text-white transition">Campus Locations</a></li>
+          <li><a href="#cta" class="hover:text-white transition">Download Brochure</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white font-bold mb-4">Contact</h4>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <i class="fas fa-headset mt-1 mr-3"></i>
+            <span>IPS Hotline:<br>(02) 8737 5545</span>
+            <li class="flex items-start">
+                <i class="fas fa-phone mt-1 mr-3"></i>
+                <span>+639704955243</span>
+            </li>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-envelope mt-1 mr-3"></i>
+            <span>info@amaes.edu.ph</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+            <span>AMA Building, 59 Panay Avenue, Quezon City</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-800 mt-12 pt-8 text-sm text-center">
+      <p>© 2025 AMA Education System. All rights reserved.</p>
+      <p class="mt-2 text-gray-500">Institute of Professional Studies - Career-Aligned Diplomas</p>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP Scroll Animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileNav.classList.toggle('hidden');
+    });
+    
+    // Program tabs
+    const programTabs = document.querySelectorAll('.program-tab');
+    const programContents = document.querySelectorAll('.program-content');
+    
+    programTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const tabName = this.getAttribute('data-tab');
+        
+        // Update active tab
+        programTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Show selected content
+        programContents.forEach(content => {
+          content.classList.add('hidden');
+          if(content.id === tabName) {
+            content.classList.remove('hidden');
+          }
+        });
+      });
+    });
+    
+    // Initialize GSAP animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate elements on scroll
+    gsap.utils.toArray('.animate-on-scroll').forEach(element => {
+      gsap.fromTo(element, {
+        opacity: 0,
+        y: 40
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        },
+        ease: 'power2.out'
+      });
+    });
+    
+    // Animate cards on hover
+    gsap.utils.toArray('.card-hover').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          y: -10,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          y: 0,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
